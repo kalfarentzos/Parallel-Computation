@@ -19,9 +19,9 @@ int main(int argc, char *argv[]){
     int N = (argc==2)? atoi(argv[1]) : DEFAULT_NUMBER_OF_THREADS;
     pthread_t * threads = (pthread_t *)malloc(N * sizeof(pthread_t));
 
-    struct timeval Start, Stop, Diff;
+    struct timeval start, stop, diff;
 
-    gettimeofday(&Start, NULL);
+    gettimeofday(&start, NULL);
     fprintf(stdout, "Thread 0. PID:%d, TID:%ld.\n", getpid(), pthread_self());
     fprintf(stdout,"Thread 0. Create threads.\n");
 
@@ -36,9 +36,9 @@ int main(int argc, char *argv[]){
 
     fprintf(stdout,"Thread 0. Exits.\n");
     printf("Sum = %d\n", sum);
-    gettimeofday(&Stop, NULL);
-    timersub(&Stop, &Start, &Diff);
-    fprintf(stdout,"Time: %ld.%ld usec\n", Diff.tv_sec, Diff.tv_usec);
+    gettimeofday(&stop, NULL);
+    timersub(&stop, &start, &diff);
+    fprintf(stdout,"Time: %ld.%ld usec\n", diff.tv_sec, diff.tv_usec);
     free(threads);
     return 0;
 }
