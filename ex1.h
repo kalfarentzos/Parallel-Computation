@@ -10,12 +10,13 @@
 
 #ifndef SHAREFILE_INCLUDED
 #define SHAREFILE_INCLUDED
-#ifdef  MAIN_FILE
-int sum = 0;
-#else
-extern int sum;
-#endif
+    #ifdef  MAIN_FILE
+    int sum = 0;
+    pthread_mutex_t Mutex = PTHREAD_MUTEX_INITIALIZER;
+    #else
+    extern int sum;
+    pthread_mutex_t Mutex;
+    #endif
 #endif
 
 void* WorkFunction(void* Arg);
-pthread_mutex_t Mutex = PTHREAD_MUTEX_INITIALIZER;
