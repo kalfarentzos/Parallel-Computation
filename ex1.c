@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
     printf("Sum = %d\n", sum);
     gettimeofday(&stop, NULL);
     timersub(&stop, &start, &diff);
-    fprintf(stdout,"Time: %ld.%ld usec\n", diff.tv_sec, diff.tv_usec);
+    fprintf(stdout,"Time: %lds %ldus\n", diff.tv_sec, diff.tv_usec);
     fprintf(stdout,"Thread 0. Exits.\n"); 
     return 0;
 }

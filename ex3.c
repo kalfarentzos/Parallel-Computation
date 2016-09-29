@@ -16,7 +16,7 @@ entries of A.
 #include "ex1.h"
 
 int main(int argc, char *argv[]){
-    NUMBER_OF_THREADS = (argc==2)? argv[1]: NUMBER_OF_THREADS;
+    NUMBER_OF_THREADS = (argc==2)? atoi(argv[1]) : NUMBER_OF_THREADS;
     int N = NUMBER_OF_THREADS;
     A = (float *) malloc(TOTAL_ITERATIONS * sizeof(float));
     
@@ -36,17 +36,19 @@ int main(int argc, char *argv[]){
         if (pthread_join(threads[i], NULL))
             fprintf(stderr,"Join thread failed.\n");
 
+    free(threads);
     gettimeofday(&stop, NULL);
     timersub(&stop, &start, &diff);
-    fprintf(stdout, "Time: %ld.%ld usec\n", diff.tv_sec, diff.tv_usec);
+    fprintf(stdout, "Time: %lds %ld us\n", diff.tv_sec, diff.tv_usec);
+    free(A);
     fprintf(stdout,"Thread 0. Exits.\n");
     return 0;
 }
 
 void * thread_function(void* Arg){
     int k = (int)Arg;
-    int start = (int)(k * float(TOTAL_ITERATIONS) / NUMBER_OF_THREADS);
-    int end = (int)((k+1) * float(TOTAL_ITERATIONS) / NUMBER_OF_THREADS);
+    int start = (int)(k * TOTAL_ITERATIONS / NUMBER_OF_THREADS);
+    int end = (int)((k+1) * TOTAL_ITERATIONS / NUMBER_OF_THREADS);
                 
     for (int i = start; i < end; i++)
         A[i] = sqrt(i*1.1) + sqrt(i*0.9) * sqrt(i);
