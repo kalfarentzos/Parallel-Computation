@@ -39,7 +39,7 @@ int main(int argc, char *argv[]){
     free(threads);
     gettimeofday(&stop, NULL);
     timersub(&stop, &start, &diff);
-    fprintf(stdout, "Time: %lds %ld us\n", diff.tv_sec, diff.tv_usec);
+    fprintf(stdout, "Time: %ld.%06ds\n", diff.tv_sec, diff.tv_usec);
     free(A);
     fprintf(stdout,"Thread 0. Exits.\n");
     return 0;

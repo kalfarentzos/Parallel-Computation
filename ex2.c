@@ -43,7 +43,7 @@ int main(int argc, char *argv[]){
     gettimeofday(&stop, NULL); 
     timersub(&stop, &start, &diff);
         
-    fprintf(stdout,"Time: %ld %ld us\n", diff.tv_sec, diff.tv_usec);
+    fprintf(stdout,"Time: %ld.%06ds\n", diff.tv_sec, diff.tv_usec);
     fprintf(stdout, "Main Process. Exits.\n");
     return 0;
 }
